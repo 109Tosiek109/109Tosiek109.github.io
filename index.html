@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#14332f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Przypomnij">
+    <title>Przypomnij</title>
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="apple-touch-icon" href="./icon.svg">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="topbar" aria-label="Podsumowanie">
+        <div>
+          <p class="eyebrow">PWA na iPhone</p>
+          <h1>Przypomnij</h1>
+        </div>
+      </section>
+
+      <section class="status-panel" aria-live="polite">
+        <div>
+          <span class="status-dot" id="notificationDot"></span>
+          <span id="notificationStatus">Sprawdzam powiadomienia...</span>
+        </div>
+        <button id="enableNotificationsButton" type="button">Włącz</button>
+      </section>
+
+      <form class="composer" id="reminderForm">
+        <label>
+          <span>Tytuł</span>
+          <input id="titleInput" name="title" type="text" placeholder="Np. zadzwonić do mamy" autocomplete="off" required>
+        </label>
+
+        <label>
+          <span>Notatka</span>
+          <textarea id="noteInput" name="note" rows="3" placeholder="Krótki opis, link albo kontekst"></textarea>
+        </label>
+
+        <div class="field-grid">
+          <label>
+            <span>Data</span>
+            <input id="dateInput" name="date" type="date" required>
+          </label>
+          <label>
+            <span>Godzina</span>
+            <input id="timeInput" name="time" type="time" required>
+          </label>
+        </div>
+
+        <button class="primary-button" type="submit">Dodaj przypomnienie</button>
+      </form>
+
+      <section class="toolbar" aria-label="Widoki">
+        <button class="segment active" type="button" data-filter="active">Aktywne</button>
+        <button class="segment" type="button" data-filter="done">Zrobione</button>
+        <button class="segment" type="button" data-filter="all">Wszystkie</button>
+      </section>
+
+      <section class="list-wrap">
+        <ul class="reminder-list" id="reminderList"></ul>
+        <div class="empty-state" id="emptyState">
+          <img src="./icon.svg" alt="" width="72" height="72">
+          <h2>Jeszcze nic tu nie ma</h2>
+          <p>Dodaj przypomnienie, a aplikacja zapisze je lokalnie w przeglądarce.</p>
+        </div>
+      </section>
+    </main>
+
+    <template id="reminderTemplate">
+      <li class="reminder-card">
+        <div class="card-main">
+          <button class="check-button" type="button" aria-label="Oznacz jako zrobione"></button>
+          <div class="card-copy">
+            <h2></h2>
+            <p class="note"></p>
+            <p class="date-line"></p>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="calendar-button" type="button">Kalendarz</button>
+          <button class="delete-button" type="button">Usuń</button>
+        </div>
+      </li>
+    </template>
+
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>
